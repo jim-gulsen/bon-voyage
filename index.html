@@ -948,6 +948,8 @@ const TRIP = {
       confirmation: "8D6HFS",
       class: "Economy Light",
       duration: "7h 50m",
+      airlineUrl: "https://www.swiss.com",
+      checkinUrl: "https://www.swiss.com/us/en/fly/check-in.html",
       notes: "Terminal 1 at JFK"
     },
     {
@@ -959,6 +961,8 @@ const TRIP = {
       confirmation: "8D6HFS",
       class: "Economy Light",
       duration: "2h 40m",
+      airlineUrl: "https://www.swiss.com",
+      checkinUrl: "https://www.swiss.com/us/en/fly/check-in.html",
       notes: "Same booking ref as LX 23"
     },
     {
@@ -970,6 +974,8 @@ const TRIP = {
       confirmation: "1QDY8A",
       class: "Economy",
       duration: "3h 20m",
+      airlineUrl: "https://www.flypgs.com",
+      checkinUrl: "https://www.flypgs.com/en/check-in",
       notes: "2 adult passengers · ⚠️ Activation code required on Pegasus app"
     },
     {
@@ -981,6 +987,8 @@ const TRIP = {
       confirmation: "8D6HFS",
       class: "Economy Basic",
       duration: "3h 20m",
+      airlineUrl: "https://www.sunexpress.com",
+      checkinUrl: "https://www.lufthansa.com/us/en/check-in-options",
       notes: ""
     },
     {
@@ -992,6 +1000,8 @@ const TRIP = {
       confirmation: "8D6HFS",
       class: "Economy Basic",
       duration: "9h 50m",
+      airlineUrl: "https://www.lufthansa.com",
+      checkinUrl: "https://www.lufthansa.com/us/en/check-in-options",
       notes: "Home! 🎉"
     }
   ],
@@ -1005,6 +1015,7 @@ const TRIP = {
       checkIn:  new Date("2026-05-25"), checkOut: new Date("2026-05-28"), nights: 3,
       confirmation: "—",
       phone: "+351 21 342 6609",
+      mapUrl: "https://maps.google.com/?q=Residencial+Florescente+Rua+das+Portas+de+Santo+Antao+95+Lisbon",
       notes: "Check-in: afternoon. Head to cruise terminal on May 28."
     },
     {
@@ -1015,6 +1026,7 @@ const TRIP = {
       checkIn:  new Date("2026-06-07"), checkOut: new Date("2026-06-08"), nights: 1,
       confirmation: "—",
       phone: "+351 21 015 0055",
+      mapUrl: "https://maps.google.com/?q=Chalet+Saudade+Rua+Dr+Alfredo+da+Costa+23+Sintra+Portugal",
       notes: "~40 min drive from Lisbon cruise terminal. Check-out Jun 8 by 12:00."
     }
   ],
@@ -1030,17 +1042,17 @@ const TRIP = {
     confirmation: "70082971",
     voyageNo: "FANTASTICA Experience",
     ports: [
-      { name: "Lisbon",    country: "Portugal",        date: new Date("2026-05-28"), type: "embark", note: "Check-in opens 14:00 · Departs 18:00" },
+      { name: "Lisbon", mapUrl: "https://maps.google.com/?q=Lisbon+Cruise+Terminal+Portugal",    country: "Portugal",        date: new Date("2026-05-28"), type: "embark", note: "Check-in opens 14:00 · Departs 18:00" },
       { name: "At Sea",    country: "",                date: new Date("2026-05-29"), type: "sea",    note: "" },
-      { name: "Alicante",  country: "Spain",           date: new Date("2026-05-30"), type: "port",   note: "Arrive 09:00 · Depart 17:00 · 8 hrs" },
-      { name: "Mahon",     country: "Menorca, Spain",  date: new Date("2026-05-31"), type: "port",   note: "Arrive 09:00 · Depart 16:00 · 7 hrs" },
-      { name: "Olbia",     country: "Sardinia, Italy", date: new Date("2026-06-01"), type: "port",   note: "Arrive 10:00 · Depart 19:00 · 9 hrs" },
-      { name: "Genoa",     country: "Italy",           date: new Date("2026-06-02"), type: "port",   note: "Arrive 09:00 · Depart 18:00 · Portofino nearby" },
-      { name: "Marseille", country: "France",          date: new Date("2026-06-03"), type: "port",   note: "Arrive 09:00 · Depart 17:00 · Provence" },
+      { name: "Alicante", mapUrl: "https://maps.google.com/?q=Alicante+Spain",  country: "Spain",           date: new Date("2026-05-30"), type: "port",   note: "Arrive 09:00 · Depart 17:00 · 8 hrs" },
+      { name: "Mahon", mapUrl: "https://maps.google.com/?q=Mahon+Menorca+Spain",     country: "Menorca, Spain",  date: new Date("2026-05-31"), type: "port",   note: "Arrive 09:00 · Depart 16:00 · 7 hrs" },
+      { name: "Olbia", mapUrl: "https://maps.google.com/?q=Olbia+Sardinia+Italy",     country: "Sardinia, Italy", date: new Date("2026-06-01"), type: "port",   note: "Arrive 10:00 · Depart 19:00 · 9 hrs" },
+      { name: "Genoa", mapUrl: "https://maps.google.com/?q=Genoa+Italy",     country: "Italy",           date: new Date("2026-06-02"), type: "port",   note: "Arrive 09:00 · Depart 18:00 · Portofino nearby" },
+      { name: "Marseille", mapUrl: "https://maps.google.com/?q=Marseille+France", country: "France",          date: new Date("2026-06-03"), type: "port",   note: "Arrive 09:00 · Depart 17:00 · Provence" },
       { name: "At Sea",    country: "",                date: new Date("2026-06-04"), type: "sea",    note: "" },
-      { name: "Malaga",    country: "Spain",           date: new Date("2026-06-05"), type: "port",   note: "Arrive 08:00 · Depart 18:00 · 10 hrs" },
-      { name: "Cadiz",     country: "Spain",           date: new Date("2026-06-06"), type: "port",   note: "Arrive 07:00 · Depart 17:00 · Seville nearby" },
-      { name: "Lisbon",    country: "Portugal",        date: new Date("2026-06-07"), type: "debark", note: "Arrive 09:00 · Disembark by 11:00" }
+      { name: "Malaga", mapUrl: "https://maps.google.com/?q=Malaga+Spain",    country: "Spain",           date: new Date("2026-06-05"), type: "port",   note: "Arrive 08:00 · Depart 18:00 · 10 hrs" },
+      { name: "Cadiz", mapUrl: "https://maps.google.com/?q=Cadiz+Spain",     country: "Spain",           date: new Date("2026-06-06"), type: "port",   note: "Arrive 07:00 · Depart 17:00 · Seville nearby" },
+      { name: "Lisbon", mapUrl: "https://maps.google.com/?q=Lisbon+Cruise+Terminal+Portugal",    country: "Portugal",        date: new Date("2026-06-07"), type: "debark", note: "Arrive 09:00 · Disembark by 11:00" }
     ]
   }
 };
@@ -1397,7 +1409,7 @@ function travelTab(tab) {
   });
 }
 function renderTravel() {
-  // Flights
+  // FLIGHTS
   document.getElementById('tp-flights').innerHTML = TRIP.flights.map(f=>`
     <div class="boarding-pass fade-up">
       <div class="bp-header">
@@ -1429,9 +1441,14 @@ function renderTravel() {
         <div><div class="bp-conf-label">Booking ref</div><div class="bp-conf-num">${f.confirmation}</div></div>
         <button class="copy-btn" onclick="copyIt('${f.confirmation}',this)">Copy</button>
       </div>
-      ${f.notes?`<div style="padding:10px 16px;font-size:12px;color:var(--muted);border-top:1px dashed var(--navy-border)">${f.notes}</div>`:''}
+      <div style="display:flex;gap:8px;padding:12px 16px;border-top:1px dashed var(--navy-border);flex-wrap:wrap;align-items:center;background:rgba(0,0,0,.15);">
+        ${f.checkinUrl ? `<a href="${f.checkinUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:14px;font-weight:500;color:var(--gold);background:rgba(201,152,64,.12);border:1px solid rgba(201,152,64,.35);padding:8px 16px;border-radius:8px;text-decoration:none;">✓ Check in online</a>` : ''}
+        ${f.airlineUrl ? `<a href="${f.airlineUrl}" target="_blank" style="display:inline-flex;align-items:center;font-size:14px;color:var(--muted);background:var(--navy-raised);border:1px solid var(--navy-border);padding:8px 16px;border-radius:8px;text-decoration:none;">${f.airline} ↗</a>` : ''}
+        ${f.notes ? `<span style="font-size:12px;color:var(--muted);margin-top:2px;width:100%">${f.notes}</span>` : ''}
+      </div>
     </div>`).join('');
-  // Hotels
+
+  // HOTELS
   document.getElementById('tp-hotels').innerHTML = TRIP.hotels.map(h=>`
     <div class="hotel-card fade-up">
       <div class="hotel-header">
@@ -1451,26 +1468,39 @@ function renderTravel() {
           <div class="hdate-sub">by 11:00</div>
         </div>
       </div>
-      ${h.notes?`<div style="padding:0 16px 12px;font-size:12px;color:var(--muted);line-height:1.5">${h.notes}</div>`:''}
+      ${h.notes?`<div style="padding:0 16px 12px;font-size:13px;color:var(--muted);line-height:1.5">${h.notes}</div>`:''}
       <div class="hotel-footer">
-        <div><div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Phone</div>
-        <a href="tel:${h.phone}" style="font-size:13px;color:var(--gold)">${h.phone}</a></div>
-        <button class="copy-btn" onclick="copyIt('${h.phone}',this)">Copy</button>
+        <div>
+          <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Phone</div>
+          <a href="tel:${h.phone}" style="font-size:15px;color:var(--gold)">${h.phone}</a>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="copy-btn" onclick="copyIt('${h.phone}',this)">Copy</button>
+          ${h.mapUrl ? `<a href="${h.mapUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:14px;font-weight:500;color:#4e9fd0;background:rgba(78,159,208,.12);border:1px solid rgba(78,159,208,.3);padding:8px 16px;border-radius:8px;text-decoration:none;">📍 Maps</a>` : ''}
+        </div>
       </div>
-      ${h.address?`<div style="padding:10px 16px;font-size:11px;color:var(--muted);border-top:1px dashed var(--navy-border)">${h.address}</div>`:''}
+      ${h.address?`<div style="padding:10px 16px;font-size:12px;color:var(--muted);border-top:1px dashed var(--navy-border)">${h.address}</div>`:''}
     </div>`).join('');
-  // Cruise
+
+  // CRUISE
   const c = TRIP.cruise;
   const ports = c.ports.map(p => {
     const special = p.type==='embark'||p.type==='debark';
     const lbl = {embark:'Embarkation',debark:'Debarkation',sea:'Day at sea'}[p.type]||p.country;
+    const mapsLink = (p.mapUrl && p.type!=='sea')
+      ? `<a href="${p.mapUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:4px;font-size:13px;color:#4e9fd0;text-decoration:none;margin-top:6px;">📍 Open in Maps</a>`
+      : '';
     return `<div class="port-stop"><div class="port-stop-inner">
       <div class="port-dot${special?' special':''}"></div>
-      <div><div class="port-name">${p.name}${p.country?', '+p.country:''}</div>
-      <div class="port-date">${fmtDate(p.date,'short')} · ${lbl}</div>
-      ${p.note?`<div class="port-type-lbl">${p.note}</div>`:''}</div>
+      <div>
+        <div class="port-name">${p.name}${p.country?', '+p.country:''}</div>
+        <div class="port-date">${fmtDate(p.date,'short')} · ${lbl}</div>
+        ${p.note?`<div class="port-type-lbl">${p.note}</div>`:''}
+        ${mapsLink}
+      </div>
     </div></div>`;
   }).join('');
+
   document.getElementById('tp-cruise').innerHTML = `
     <div class="cruise-card fade-up">
       <div class="cruise-header"><div class="cruise-line-name">${c.line}</div><div class="cruise-badge">${c.voyageNo}</div></div>
@@ -1478,24 +1508,25 @@ function renderTravel() {
         <div class="cruise-ship">${c.ship}</div>
         <div class="cruise-cabin">${c.cabin} · ${c.cabinType} · ${c.deck}</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
-          <div><div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Embark</div>
-            <div style="font-size:14px;font-weight:500;color:var(--cream)">${c.embark.port}</div>
-            <div style="font-size:12px;color:var(--muted)">${fmtDate(c.embark.date,'short')} · ${c.embark.time}</div></div>
-          <div><div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Debark</div>
-            <div style="font-size:14px;font-weight:500;color:var(--cream)">${c.debark.port}</div>
-            <div style="font-size:12px;color:var(--muted)">${fmtDate(c.debark.date,'short')} · ${c.debark.time}</div></div>
+          <div><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Embark</div>
+            <div style="font-size:16px;font-weight:600;color:var(--cream)">${c.embark.port}</div>
+            <div style="font-size:13px;color:var(--muted)">${fmtDate(c.embark.date,'short')} · ${c.embark.time}</div></div>
+          <div><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Debark</div>
+            <div style="font-size:16px;font-weight:600;color:var(--cream)">${c.debark.port}</div>
+            <div style="font-size:13px;color:var(--muted)">${fmtDate(c.debark.date,'short')} · ${c.debark.time}</div></div>
         </div>
         <div class="cruise-route-label">Ports of Call</div>
         <div class="port-stops">${ports}</div>
       </div>
       <div class="cruise-footer">
-        <div><div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Booking ref</div>
-        <div style="font-family:var(--font-mono);font-size:16px;color:var(--gold)">${c.confirmation}</div></div>
+        <div><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Booking ref</div>
+        <div style="font-family:var(--font-mono);font-size:18px;color:var(--gold)">${c.confirmation}</div></div>
         <button class="copy-btn" onclick="copyIt('${c.confirmation}',this)">Copy</button>
       </div>
     </div>`;
 }
 
+// ── GROUND ────────────────────────────────────────────────────
 // ── GROUND ────────────────────────────────────────────────────
 let gTransfers = [];
 function renderGround() {
@@ -1509,15 +1540,24 @@ function renderGroundList() {
   const empty=document.getElementById('ground-empty');
   if(!sorted.length){list.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
+  const APP_LINKS = {
+    taxi:     [['Bolt','https://bolt.eu'],['Uber','https://uber.com']],
+    rideshare:[['Uber','https://uber.com'],['Bolt','https://bolt.eu']],
+    train:    [['Renfe (Spain)','https://www.renfe.com'],['Trenitalia (Italy)','https://www.trenitalia.com']],
+    bus:      [['FlixBus','https://www.flixbus.com']],
+    ferry:    [['Direct Ferries','https://www.directferries.com']]
+  };
   list.innerHTML=sorted.map(t=>{
     const ds=t.date?new Date(t.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}):'';
+    const apps=(APP_LINKS[t.type]||[]).map(([l,u])=>`<a href="${u}" target="_blank" style="display:inline-flex;align-items:center;font-size:13px;color:var(--muted);background:var(--navy-raised);border:1px solid var(--navy-border);padding:6px 14px;border-radius:8px;text-decoration:none;">${l} ↗</a>`).join('');
     return `<div class="ground-item fade-up" id="gi-${t.id}">
       <button class="gi-del" onclick="delTransfer('${t.id}')" title="Delete">×</button>
       <div class="gi-top"><span class="gi-type">${t.type}</span><span class="gi-dt">${ds}${t.time?' · '+t.time:''}</span></div>
       <div class="gi-route"><span>${t.from}</span><span style="color:var(--muted);font-size:16px">→</span><span>${t.to}</span></div>
       ${t.confirmation?`<div class="gi-conf">${t.confirmation}</div>`:''}
       ${t.notes?`<div class="gi-note">${t.notes}</div>`:''}
-      <button onclick="openModal('${t.id}')" style="background:none;border:none;color:var(--muted);font-size:12px;margin-top:8px;cursor:pointer;padding:0">✎ Edit</button>
+      ${apps?`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">${apps}</div>`:''}
+      <button onclick="openModal('${t.id}')" style="background:none;border:none;color:var(--muted);font-size:12px;margin-top:10px;cursor:pointer;padding:0">✎ Edit</button>
     </div>`;
   }).join('');
 }
@@ -1564,6 +1604,7 @@ function delTransfer(id) {
   saveGround(gTransfers);
   renderGroundList();
 }
+
 
 // ── INFO ──────────────────────────────────────────────────────
 let noteSaveTimer;
