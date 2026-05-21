@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="color-scheme" content="dark">
+  <title>Bon Voyage — Jim's European Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+/* ================================================================
+   BON VOYAGE — Shared Styles
+   Aesthetic: Midnight Voyage — deep navy, warm gold, Cormorant serif
+   ================================================================ */
+
+
+:root {
+  --navy-deep:  #090f1a;
+  --navy:       #0d1726;
+  --navy-card:  #111d30;
+  --navy-raised:#172640;
+  --navy-border:#1e3050;
+  --navy-hover: #1a2e48;
+  --gold:       #c99840;
+  --gold-mid:   #d9ae60;
+  --gold-light: #edc878;
+  --gold-pale:  #f5e0a8;
+  --cream:      #f0e8d8;
+  --cream-dim:  #c8bfae;
+  --muted:      #6a82a0;
+  --muted-light:#90a8c4;
+  --success:    #3daf7a;
+  --info:       #4e9fd8;
+  --warning:    #e89840;
+  --danger:     #e05050;
+  --font-display:'Cormorant Garamond', Georgia, serif;
+  --font-body:  'DM Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Courier New', monospace;
+  --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 24px;
+  --nav-h: 68px; --header-h: 58px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+a { text-decoration: none; color: inherit; }
+button, input, select, textarea { font-family: var(--font-body); }
+
+body {
+  font-family: var(--font-body);
+  background: var(--navy-deep);
+  color: var(--cream);
+  min-height: 100vh;
+  max-width: 430px;
+  margin: 0 auto;
+  overflow-x: hidden;
+  padding-bottom: calc(var(--nav-h) + 8px);
+  position: relative;
+}
+body::after {
+  content: ''; position: fixed; inset: 0;
+  pointer-events: none; z-index: 9999; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.page-content { padding: calc(var(--header-h) + 12px) 16px 16px; position: relative; z-index: 1; }
+
+/* PAGE HEADER */
+.page-header {
+  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 430px; height: var(--header-h);
+  background: rgba(9,15,26,0.94); backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; z-index: 100; border-bottom: 1px solid var(--navy-border);
+}
+.page-header::after {
+  content: ''; position: absolute; bottom: -1px; left: 10%; right: 10%;
+  height: 1px; background: linear-gradient(90deg, transparent, rgba(201,152,64,0.4), transparent);
+}
+.header-wordmark { font-family: var(--font-display); font-size: 22px; font-weight: 400; font-style: italic; color: var(--gold); letter-spacing: 0.04em; }
+.header-title { font-family: var(--font-display); font-size: 20px; font-weight: 400; color: var(--cream); }
+.header-sub { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; }
+.header-right { text-align: right; }
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 430px; height: var(--nav-h);
+  background: rgba(17,29,48,0.96); backdrop-filter: blur(16px);
+  border-top: 1px solid var(--navy-border);
+  display: flex; align-items: center; justify-content: space-around;
+  padding: 0 4px env(safe-area-inset-bottom, 0px); z-index: 100;
+}
+.bottom-nav::before {
+  content: ''; position: absolute; top: -1px; left: 10%; right: 10%;
+  height: 1px; background: linear-gradient(90deg, transparent, rgba(201,152,64,0.3), transparent);
+}
+.nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 8px 12px; border-radius: var(--r-md); color: var(--muted); transition: color 0.2s; flex: 1; cursor: pointer; }
+.nav-item:hover, .nav-item.active { color: var(--gold); }
+.nav-icon { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.nav-label { font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* BADGES */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 20px; font-size: 9px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; }
+.badge-flight  { background: rgba(78,159,216,0.12);  color: var(--info);    border: 1px solid rgba(78,159,216,0.25); }
+.badge-hotel   { background: rgba(78,159,216,0.08);  color: #7db8e8;        border: 1px solid rgba(125,184,232,0.25); }
+.badge-cruise  { background: rgba(61,175,122,0.12);  color: var(--success); border: 1px solid rgba(61,175,122,0.25); }
+.badge-ground  { background: rgba(232,152,64,0.12);  color: var(--warning); border: 1px solid rgba(232,152,64,0.25); }
+
+/* FILTER BAR */
+.filter-bar { display: flex; gap: 8px; padding: 10px 16px 12px; overflow-x: auto; scrollbar-width: none; position: relative; z-index: 1; }
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-chip { flex-shrink: 0; padding: 7px 15px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--navy-border); color: var(--muted); background: var(--navy-card); white-space: nowrap; transition: all 0.18s; }
+.filter-chip.active { background: var(--gold); color: var(--navy-deep); border-color: var(--gold); }
+
+/* TABS */
+.tab-bar { display: flex; padding: 0 16px; border-bottom: 1px solid var(--navy-border); position: sticky; top: var(--header-h); background: rgba(9,15,26,0.96); backdrop-filter: blur(10px); z-index: 50; }
+.tab-item { flex: 1; padding: 12px 6px; text-align: center; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; position: relative; top: 1px; transition: color 0.18s; }
+.tab-item.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-panel { display: none; padding: 16px; }
+.tab-panel.active { display: block; }
+
+/* BOARDING PASS */
+.boarding-pass { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 18px; position: relative; }
+.boarding-pass::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--info), transparent); }
+.bp-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 10px; border-bottom: 1px dashed var(--navy-border); }
+.bp-airline { font-family: var(--font-display); font-size: 14px; font-style: italic; color: var(--gold-mid); }
+.bp-badge { font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; background: rgba(78,159,216,0.12); color: var(--info); border: 1px solid rgba(78,159,216,0.25); }
+.bp-route { display: flex; align-items: center; padding: 18px 16px 14px; }
+.bp-airport { text-align: center; min-width: 72px; }
+.bp-iata { font-family: var(--font-display); font-size: 44px; font-weight: 300; color: var(--cream); line-height: 1; }
+.bp-city { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.bp-time { font-family: var(--font-display); font-size: 18px; color: var(--gold-light); margin-top: 4px; }
+.bp-mid { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 0 10px; }
+.bp-line-wrap { width: 100%; display: flex; align-items: center; }
+.bp-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--navy-border), var(--muted), var(--navy-border)); opacity: 0.5; }
+.bp-plane { color: var(--muted); padding: 0 6px; }
+.bp-duration { font-size: 10px; color: var(--muted); letter-spacing: 0.05em; }
+.bp-details { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--navy-border); }
+.bp-detail { padding: 10px 12px; border-right: 1px solid var(--navy-border); }
+.bp-detail:last-child { border-right: none; }
+.bp-dlabel { font-size: 8px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.bp-dvalue { font-size: 13px; font-weight: 500; color: var(--cream); }
+.bp-footer { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-top: 1px dashed var(--navy-border); background: rgba(201,152,64,0.04); }
+.bp-conf-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.bp-conf-num { font-family: var(--font-mono); font-size: 16px; color: var(--gold); letter-spacing: 0.15em; }
+
+/* HOTEL CARD */
+.hotel-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 18px; position: relative; }
+.hotel-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(78,159,216,0.7), transparent); }
+.hotel-header { padding: 14px 16px 12px; border-bottom: 1px dashed var(--navy-border); }
+.hotel-name { font-family: var(--font-display); font-size: 26px; font-weight: 400; font-style: italic; color: var(--cream); }
+.hotel-location { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.hotel-stay { display: flex; align-items: center; justify-content: space-between; padding: 16px; }
+.hotel-date-block { text-align: center; }
+.hdlbl { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.hdate { font-family: var(--font-display); font-size: 22px; color: var(--cream); }
+.hdate-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.hotel-nights { text-align: center; }
+.hn-num { font-family: var(--font-display); font-size: 44px; font-weight: 300; color: var(--info); line-height: 1; }
+.hn-lbl { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; margin-top: 2px; }
+.hotel-footer { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-top: 1px dashed var(--navy-border); background: rgba(78,159,216,0.04); }
+
+/* CRUISE CARD */
+.cruise-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 18px; position: relative; }
+.cruise-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--success), transparent); }
+.cruise-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 10px; border-bottom: 1px dashed var(--navy-border); }
+.cruise-line-name { font-family: var(--font-display); font-size: 14px; font-style: italic; color: var(--gold-mid); }
+.cruise-badge { font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; background: rgba(61,175,122,0.12); color: var(--success); border: 1px solid rgba(61,175,122,0.25); }
+.cruise-body { padding: 16px; border-bottom: 1px dashed var(--navy-border); }
+.cruise-ship { font-family: var(--font-display); font-size: 28px; font-weight: 400; font-style: italic; color: var(--cream); margin-bottom: 4px; }
+.cruise-cabin { font-size: 13px; color: var(--muted); }
+.cruise-route-label { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 16px 0 12px; }
+.port-stops { }
+.port-stop { display: flex; gap: 12px; }
+.port-stop-inner { display: flex; gap: 12px; padding-bottom: 14px; position: relative; width: 100%; }
+.port-stop-inner::before { content: ''; position: absolute; left: 5px; top: 14px; bottom: -2px; width: 1px; background: var(--navy-border); }
+.port-stop:last-child .port-stop-inner::before { display: none; }
+.port-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--navy-raised); border: 2px solid var(--navy-border); flex-shrink: 0; margin-top: 2px; position: relative; z-index: 1; }
+.port-dot.special { background: var(--success); border-color: var(--success); }
+.port-name { font-size: 14px; font-weight: 500; color: var(--cream); }
+.port-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.port-type-lbl { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--success); margin-top: 2px; }
+.cruise-footer { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: rgba(61,175,122,0.04); }
+
+/* TIMELINE */
+.timeline-group { margin-bottom: 28px; position: relative; z-index: 1; }
+.tl-date-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.tl-day { font-family: var(--font-display); font-size: 36px; font-weight: 300; color: var(--gold); line-height: 1; min-width: 40px; text-align: center; }
+.tl-date-info { }
+.tl-month { font-size: 14px; font-weight: 500; color: var(--cream); letter-spacing: 0.03em; }
+.tl-dow { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.tl-rule { flex: 1; height: 1px; background: linear-gradient(90deg, var(--navy-border), transparent); }
+.tl-events { padding-left: 52px; position: relative; }
+.tl-events::before { content: ''; position: absolute; left: 16px; top: 8px; bottom: 8px; width: 1px; background: var(--navy-border); }
+.tl-event { position: relative; margin-bottom: 8px; }
+.tl-event::before { content: ''; position: absolute; left: -37px; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--navy-deep); border: 2px solid var(--navy-border); z-index: 1; }
+.tl-event.type-flight::before  { border-color: var(--info);    background: rgba(78,159,216,0.3); }
+.tl-event.type-hotel::before   { border-color: #7db8e8;        background: rgba(125,184,232,0.2); }
+.tl-event.type-cruise::before  { border-color: var(--success); background: rgba(61,175,122,0.3); }
+.tl-event.type-ground::before  { border-color: var(--warning); background: rgba(232,152,64,0.3); }
+.tl-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--r-md); padding: 12px 14px; cursor: pointer; transition: border-color 0.18s, background 0.18s; }
+.tl-card:hover { border-color: rgba(201,152,64,0.4); background: var(--navy-hover); }
+.tl-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; }
+.tl-card-title { font-size: 14px; font-weight: 500; color: var(--cream); }
+.tl-card-time { font-size: 12px; color: var(--muted); flex-shrink: 0; margin-left: 8px; }
+.tl-card-sub { font-size: 12px; color: var(--muted); }
+
+/* GROUND */
+.ground-item { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--r-md); padding: 14px 16px 14px 20px; margin-bottom: 10px; position: relative; overflow: hidden; }
+.ground-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--warning); }
+.gi-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.gi-type { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warning); }
+.gi-dt { font-size: 12px; color: var(--muted); }
+.gi-route { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 5px; flex-wrap: wrap; }
+.gi-conf { font-family: var(--font-mono); font-size: 12px; color: var(--gold); letter-spacing: 0.1em; }
+.gi-note { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+.gi-del { position: absolute; top: 10px; right: 10px; background: none; border: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; padding: 4px 6px; border-radius: 4px; transition: color 0.18s; }
+.gi-del:hover { color: var(--danger); }
+
+/* FAB */
+.fab { position: fixed; bottom: calc(var(--nav-h) + 16px); right: max(16px, calc(50% - 199px)); width: 54px; height: 54px; border-radius: 50%; background: var(--gold); color: var(--navy-deep); border: none; font-size: 28px; font-weight: 300; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(201,152,64,0.35); z-index: 90; transition: transform 0.2s var(--ease), background 0.2s; }
+.fab:hover { transform: scale(1.08); background: var(--gold-light); }
+
+/* MODAL */
+.modal-overlay { position: fixed; inset: 0; background: rgba(9,15,26,0.82); backdrop-filter: blur(6px); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-sheet { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%) translateY(100%); width: 100%; max-width: 430px; background: var(--navy-card); border-radius: var(--r-xl) var(--r-xl) 0 0; border: 1px solid var(--navy-border); border-bottom: none; padding: 0 20px 40px; z-index: 201; transition: transform 0.32s var(--ease); max-height: 90vh; overflow-y: auto; }
+.modal-sheet.open { transform: translateX(-50%) translateY(0); }
+.modal-handle { width: 40px; height: 4px; border-radius: 2px; background: var(--navy-border); margin: 14px auto 22px; }
+.modal-title { font-family: var(--font-display); font-size: 26px; font-weight: 400; font-style: italic; color: var(--cream); margin-bottom: 22px; }
+.form-group { margin-bottom: 16px; }
+.form-label { display: block; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+.form-input, .form-select, .form-textarea { width: 100%; background: var(--navy-raised); border: 1px solid var(--navy-border); border-radius: var(--r-sm); color: var(--cream); font-size: 15px; padding: 11px 14px; transition: border-color 0.18s; -webkit-appearance: none; appearance: none; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--gold); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+.form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236a82a0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+.form-select option { background: var(--navy-card); }
+.form-textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.btn-primary { width: 100%; padding: 14px; background: var(--gold); color: var(--navy-deep); border: none; border-radius: var(--r-md); font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.18s, transform 0.18s; margin-top: 8px; }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-secondary { width: 100%; padding: 12px; background: transparent; color: var(--muted); border: 1px solid var(--navy-border); border-radius: var(--r-md); font-size: 14px; cursor: pointer; transition: all 0.18s; margin-top: 8px; }
+.btn-secondary:hover { color: var(--cream); border-color: var(--muted); }
+
+/* DASHBOARD */
+.hero-section { text-align: center; padding: 20px 0 24px; position: relative; z-index: 1; overflow: hidden; }
+.hero-stars { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.star { position: absolute; border-radius: 50%; background: var(--gold-pale); animation: twinkle var(--d,3s) ease-in-out var(--dl,0s) infinite; }
+@keyframes twinkle { 0%,100%{opacity:0.1;transform:scale(1)} 50%{opacity:0.55;transform:scale(1.4)} }
+.hero-pre { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.hero-num { font-family: var(--font-display); font-size: 100px; font-weight: 300; color: var(--gold); line-height: 1; letter-spacing: -3px; }
+.hero-unit { font-family: var(--font-display); font-size: 20px; font-weight: 300; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 2px; }
+.hero-dep { font-size: 12px; color: var(--muted); margin-top: 10px; }
+.hero-dep span { color: var(--cream-dim); }
+.trip-progress { margin-bottom: 16px; position: relative; z-index: 1; }
+.tp-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; }
+.trip-name { font-family: var(--font-display); font-size: 18px; font-style: italic; color: var(--cream); }
+.trip-dur { font-size: 11px; color: var(--muted); white-space: nowrap; margin-left: 12px; text-align: right; }
+.prog-bar-wrap { height: 3px; background: var(--navy-border); border-radius: 2px; overflow: hidden; margin-bottom: 5px; }
+.prog-bar { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 2px; transition: width 0.6s; }
+.prog-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); }
+.next-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--r-lg); padding: 16px; margin-bottom: 16px; position: relative; z-index: 1; overflow: hidden; }
+.next-card::after { content: ''; position: absolute; right: -30px; top: 50%; transform: translateY(-50%); width: 100px; height: 100px; background: radial-gradient(circle, rgba(201,152,64,0.06), transparent 70%); pointer-events: none; }
+.next-pre { font-size: 9px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.next-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+.next-title { font-family: var(--font-display); font-size: 22px; color: var(--cream); line-height: 1.1; }
+.next-detail { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
+.stat-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--r-md); padding: 14px 8px; text-align: center; }
+.stat-num { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+.stat-lbl { font-size: 10px; color: var(--muted); }
+.section-label { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; position: relative; z-index: 1; }
+.upcoming-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--r-md); margin-bottom: 8px; transition: border-color 0.18s; position: relative; z-index: 1; cursor: pointer; }
+.upcoming-item:hover { border-color: rgba(201,152,64,0.4); }
+.up-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.up-text { flex: 1; }
+.up-title { font-size: 14px; font-weight: 500; color: var(--cream); margin-bottom: 2px; }
+.up-date { font-size: 11px; color: var(--muted); }
+.up-chev { color: var(--muted); font-size: 16px; }
+
+/* CALENDAR */
+.cal-wrap { padding-bottom: 16px; position: relative; z-index: 1; }
+.cal-month-header { text-align: center; padding: 8px 0 14px; }
+.cal-month-name { font-family: var(--font-display); font-size: 22px; font-style: italic; color: var(--cream); }
+.cal-year { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.cal-dow { text-align: center; font-size: 9px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 4px 0 6px; }
+.cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--muted); border-radius: 6px; position: relative; }
+.cal-day.in-trip { background: rgba(201,152,64,0.06); color: var(--cream-dim); }
+.cal-day.ev-flight  { background: rgba(78,159,216,0.2);  color: var(--info);    font-weight: 500; }
+.cal-day.ev-hotel   { background: rgba(201,152,64,0.16); color: var(--gold-mid);font-weight: 500; }
+.cal-day.ev-cruise  { background: rgba(61,175,122,0.2);  color: var(--success); font-weight: 500; }
+.cal-day.ev-ground  { background: rgba(232,152,64,0.16); color: var(--warning); font-weight: 500; }
+.cal-day.today { box-shadow: inset 0 0 0 1px var(--gold); }
+.cal-sep { height: 1px; background: var(--navy-border); margin: 16px 0; }
+.cal-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; justify-content: center; }
+.cal-leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+.cal-leg-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+/* INFO */
+.info-section { margin-bottom: 24px; position: relative; z-index: 1; }
+.info-section-title { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding-bottom: 10px; border-bottom: 1px solid var(--navy-border); margin-bottom: 12px; }
+.conf-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--r-md); margin-bottom: 8px; gap: 12px; }
+.conf-name { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 2px; }
+.conf-type { font-size: 11px; color: var(--muted); }
+.conf-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.conf-num { font-family: var(--font-mono); font-size: 15px; color: var(--gold); letter-spacing: 0.12em; white-space: nowrap; }
+.copy-btn { background: none; border: 1px solid var(--navy-border); color: var(--muted); padding: 4px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.18s; white-space: nowrap; }
+.copy-btn:hover { color: var(--gold); border-color: rgba(201,152,64,0.4); }
+.copy-btn.copied { color: var(--success); border-color: rgba(61,175,122,0.4); }
+.notes-area { width: 100%; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: var(--r-md); color: var(--cream); font-size: 14px; padding: 14px; line-height: 1.6; resize: vertical; min-height: 130px; transition: border-color 0.18s; }
+.notes-area:focus { outline: none; border-color: var(--gold); }
+.notes-area::placeholder { color: var(--muted); }
+.notes-save { background: rgba(201,152,64,0.12); color: var(--gold); border: 1px solid rgba(201,152,64,0.3); padding: 9px 18px; border-radius: var(--r-sm); font-size: 12px; font-weight: 500; cursor: pointer; margin-top: 8px; transition: all 0.18s; }
+.notes-save:hover { background: rgba(201,152,64,0.2); }
+.detail-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--navy-border); }
+.detail-row:last-child { border-bottom: none; }
+.detail-lbl { font-size: 12px; color: var(--muted); }
+.detail-val { font-size: 13px; font-weight: 500; color: var(--cream); }
+
+/* EMPTY */
+.empty-state { text-align: center; padding: 60px 20px; }
+.empty-icon { font-size: 44px; margin-bottom: 16px; opacity: 0.35; }
+.empty-title { font-family: var(--font-display); font-size: 22px; font-style: italic; color: var(--muted-light); margin-bottom: 8px; }
+.empty-sub { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+.fade-up { opacity: 0; animation: fadeUp 0.45s var(--ease) forwards; }
+.fade-up:nth-child(1){animation-delay:.04s} .fade-up:nth-child(2){animation-delay:.09s}
+.fade-up:nth-child(3){animation-delay:.14s} .fade-up:nth-child(4){animation-delay:.19s}
+.fade-up:nth-child(5){animation-delay:.24s} .fade-up:nth-child(6){animation-delay:.29s}
+.fade-up:nth-child(7){animation-delay:.34s} .fade-up:nth-child(8){animation-delay:.39s}
+
+.divider-dashed { border: none; border-top: 1px dashed var(--navy-border); margin: 12px 0; }
+.mono { font-family: var(--font-mono); }
+
+/* SPA overrides */
+.page { display:none; min-height:100vh; }
+.page.active { display:block; animation: fadeUp .25s var(--ease) both; }
+.bottom-nav .nav-item { background:none; border:none; cursor:pointer; flex:1; }
+#toast {
+  position:fixed; bottom:calc(var(--nav-h)+14px); left:50%;
+  transform:translateX(-50%);
+  background:var(--navy-raised); border:1px solid var(--navy-border);
+  color:var(--gold); padding:8px 20px; border-radius:20px;
+  font-size:12px; letter-spacing:.05em;
+  opacity:0; transition:opacity .2s; pointer-events:none; z-index:500;
+  white-space:nowrap;
+}
+.view-toggle { display:flex; gap:6px; }
+.vtog { padding:7px 18px; border-radius:20px; border:1px solid var(--navy-border);
+  background:none; color:var(--muted); font-size:12px; font-weight:500;
+  cursor:pointer; transition:all .18s; }
+.vtog.active { background:var(--gold); color:var(--navy-deep); border-color:var(--gold); }
+.vw { display:none; }
+.vw.active { display:block; }
+
+  
+/* ── READABILITY OVERRIDES ─────────────────────────────────── */
+:root {
+  --muted: #a8bdd4 !important;          /* was #6a82a0 — much brighter */
+  --muted-light: #c0d0e0 !important;
+}
+
+/* Boarding pass labels & values */
+.bp-dlabel      { font-size: 12px !important; letter-spacing:.1em !important; }
+.bp-dvalue      { font-size: 17px !important; }
+.bp-city        { font-size: 13px !important; }
+.bp-duration    { font-size: 13px !important; color: var(--cream) !important; }
+.bp-conf-label  { font-size: 12px !important; }
+.bp-conf-num    { font-size: 18px !important; }
+.bp-badge       { font-size: 11px !important; padding: 4px 11px !important; }
+.bp-plane       { font-size: 18px !important; color: var(--gold) !important; }
+
+/* Hotel */
+.hdlbl          { font-size: 12px !important; }
+.hdate-sub      { font-size: 13px !important; }
+.hotel-location { font-size: 13px !important; }
+.hn-lbl         { font-size: 13px !important; }
+
+/* Cruise */
+.cruise-cabin       { font-size: 14px !important; color: var(--cream) !important; }
+.cruise-route-label { font-size: 12px !important; }
+.port-date          { font-size: 13px !important; }
+.port-type-lbl      { font-size: 12px !important; }
+.port-name          { font-size: 15px !important; }
+
+/* Timeline */
+.tl-card-time { font-size: 14px !important; }
+.tl-card-sub  { font-size: 14px !important; }
+.tl-dow       { font-size: 13px !important; }
+
+/* Ground */
+.gi-type { font-size: 12px !important; }
+.gi-dt   { font-size: 14px !important; color: var(--cream) !important; }
+.gi-note { font-size: 13px !important; }
+.gi-route { font-size: 15px !important; gap: 8px !important; }
+
+/* Home */
+.hero-pre     { font-size: 13px !important; }
+.hero-unit    { font-size: 26px !important; color: var(--cream) !important; }
+.hero-dep     { font-size: 14px !important; }
+.next-pre     { font-size: 12px !important; }
+.next-detail  { font-size: 15px !important; }
+.stat-lbl     { font-size: 13px !important; }
+.stat-num     { font-size: 32px !important; }
+.section-label{ font-size: 12px !important; }
+.up-date      { font-size: 13px !important; }
+.up-title     { font-size: 15px !important; }
+.prog-labels  { font-size: 12px !important; }
+.trip-dur     { font-size: 13px !important; }
+
+/* Info */
+.info-section-title { font-size: 12px !important; }
+.detail-lbl         { font-size: 14px !important; }
+.detail-val         { font-size: 15px !important; }
+.conf-name          { font-size: 15px !important; }
+.conf-type          { font-size: 13px !important; }
+.copy-btn {
+  font-size: 13px !important;
+  padding: 7px 16px !important;
+  color: var(--gold) !important;
+  border-color: rgba(201,152,64,0.35) !important;
+}
+
+/* Calendar */
+.cal-dow      { font-size: 11px !important; }
+.cal-day      { font-size: 14px !important; }
+.cal-leg-item { font-size: 12px !important; }
+.cal-month-name { font-size: 18px !important; }
+
+/* Filter chips & tabs */
+.filter-chip { font-size: 14px !important; padding: 8px 16px !important; }
+.tab-item    { font-size: 15px !important; }
+.nav-label   { font-size: 11px !important; }
+
+/* Forms */
+.form-label  { font-size: 12px !important; }
+.form-input,
+.form-select,
+.form-textarea { font-size: 16px !important; }  /* 16px prevents iOS zoom */
+.modal-title { font-size: 20px !important; }
+.btn-primary { font-size: 16px !important; }
+
+/* Notes */
+.notes-area  { font-size: 16px !important; }
+.notes-save  { font-size: 15px !important; }
+/* ─────────────────────────────────────────────────────────── */
+
+  
+/* ── DARK MODE BG FIX + TYPOGRAPHY PUNCH ────────────────────── */
+html { background: #0a0d14 !important; color-scheme: dark !important; }
+body { background: #0a0d14 !important; color: #e2d5bc !important; }
+.page { background: #0a0d14 !important; }
+
+/* Heavier serif weight everywhere */
+.hero-num,.next-title,.hotel-name,.cruise-ship,.bp-iata,.hdate,.tl-card-title,.trip-name { font-weight:600!important; }
+
+/* Hero */
+.hero-pre  { font-size:15px!important; font-weight:600!important; color:#a8bdd4!important; }
+.hero-num  { font-size:110px!important; font-weight:600!important; line-height:1!important; }
+.hero-unit { font-size:28px!important; font-weight:600!important; color:#a8bdd4!important; letter-spacing:.2em!important; }
+.hero-dep  { font-size:16px!important; color:#a8bdd4!important; }
+.hero-dep span { color:#e2d5bc!important; font-weight:500!important; }
+
+/* Progress */
+.trip-name { font-size:16px!important; font-weight:600!important; }
+.trip-dur  { font-size:14px!important; }
+.prog-labels { font-size:13px!important; }
+
+/* Next up */
+.next-pre   { font-size:13px!important; font-weight:600!important; letter-spacing:.18em!important; }
+.next-title { font-size:26px!important; font-weight:600!important; line-height:1.2!important; }
+.next-detail{ font-size:16px!important; line-height:1.6!important; }
+
+/* Stats */
+.stat-num { font-size:38px!important; font-weight:600!important; }
+.stat-lbl { font-size:14px!important; }
+
+/* Upcoming */
+.section-label { font-size:13px!important; font-weight:600!important; }
+.up-title { font-size:16px!important; font-weight:600!important; }
+.up-date  { font-size:14px!important; }
+
+/* Boarding pass */
+.bp-iata       { font-size:56px!important; font-weight:600!important; line-height:1!important; }
+.bp-city       { font-size:14px!important; font-weight:500!important; color:#a8bdd4!important; }
+.bp-time       { font-size:22px!important; color:#e2d5bc!important; }
+.bp-airline    { font-size:15px!important; color:#c9985a!important; }
+.bp-badge      { font-size:12px!important; padding:5px 12px!important; }
+.bp-duration   { font-size:14px!important; font-weight:600!important; color:#e2d5bc!important; }
+.bp-dlabel     { font-size:12px!important; font-weight:600!important; color:#a8bdd4!important; }
+.bp-dvalue     { font-size:18px!important; font-weight:600!important; }
+.bp-conf-label { font-size:12px!important; font-weight:600!important; color:#a8bdd4!important; }
+.bp-conf-num   { font-size:22px!important; letter-spacing:.15em!important; }
+
+/* Hotels */
+.hotel-name    { font-size:26px!important; font-weight:600!important; }
+.hotel-location{ font-size:14px!important; color:#a8bdd4!important; }
+.hdlbl  { font-size:12px!important; font-weight:600!important; color:#a8bdd4!important; }
+.hdate  { font-size:26px!important; font-weight:600!important; }
+.hdate-sub { font-size:14px!important; }
+.hn-num { font-size:38px!important; font-weight:600!important; }
+.hn-lbl { font-size:14px!important; }
+
+/* Cruise */
+.cruise-line-name  { font-size:14px!important; font-weight:600!important; }
+.cruise-ship       { font-size:30px!important; font-weight:600!important; }
+.cruise-cabin      { font-size:15px!important; color:#a8bdd4!important; }
+.cruise-route-label{ font-size:13px!important; font-weight:600!important; }
+.port-name  { font-size:17px!important; font-weight:600!important; }
+.port-date  { font-size:14px!important; }
+.port-type-lbl { font-size:13px!important; }
+
+/* Timeline */
+.tl-day   { font-size:42px!important; font-weight:600!important; }
+.tl-month { font-size:16px!important; font-weight:600!important; }
+.tl-dow   { font-size:14px!important; }
+.tl-card-title { font-size:17px!important; font-weight:600!important; }
+.tl-card-time  { font-size:15px!important; }
+.tl-card-sub   { font-size:14px!important; }
+
+/* Ground */
+.gi-type  { font-size:13px!important; font-weight:600!important; }
+.gi-dt    { font-size:15px!important; color:#e2d5bc!important; }
+.gi-route { font-size:16px!important; font-weight:500!important; }
+.gi-note  { font-size:14px!important; }
+
+/* Info */
+.info-section-title { font-size:13px!important; font-weight:600!important; }
+.detail-lbl { font-size:15px!important; }
+.detail-val { font-size:16px!important; font-weight:600!important; }
+.conf-name  { font-size:16px!important; font-weight:600!important; }
+.conf-type  { font-size:14px!important; }
+.copy-btn { font-size:14px!important; padding:8px 18px!important; font-weight:500!important; color:#c9985a!important; border-color:rgba(201,152,64,.4)!important; }
+
+/* Calendar */
+.cal-month-name { font-size:20px!important; font-weight:600!important; }
+.cal-dow  { font-size:12px!important; font-weight:600!important; }
+.cal-day  { font-size:15px!important; font-weight:500!important; }
+.cal-leg-item { font-size:13px!important; }
+
+/* Tabs + nav */
+.tab-item    { font-size:16px!important; font-weight:500!important; }
+.filter-chip { font-size:14px!important; padding:9px 18px!important; font-weight:500!important; }
+.nav-label   { font-size:11px!important; font-weight:500!important; }
+.header-wordmark { font-size:22px!important; }
+.header-title { font-size:22px!important; font-weight:600!important; font-style:italic!important; font-family:var(--font-display)!important; }
+.modal-title { font-size:22px!important; font-weight:600!important; }
+.form-label  { font-size:13px!important; font-weight:600!important; }
+</style>
+</head>
+<body>
+
+<!-- ═══ PAGE: HOME ════════════════════════════════════════════ -->
+<div class="page active" id="pg-home">
+  <header class="page-header">
+    <span class="header-wordmark">Bon Voyage</span>
+    <div class="header-right">
+      <div id="hdr-name" style="font-size:12px;color:var(--muted);letter-spacing:.04em"></div>
+      <div id="hdr-dates" style="font-size:11px;color:var(--muted);margin-top:1px"></div>
+    </div>
+  </header>
+  <main class="page-content">
+    <section class="hero-section fade-up">
+      <div class="hero-stars" id="hero-stars"></div>
+      <div class="hero-pre" id="hero-pre">DEPARTURE IN</div>
+      <div class="hero-num" id="hero-num">—</div>
+      <div class="hero-unit" id="hero-unit">days</div>
+      <div class="hero-dep" id="hero-dep"></div>
+    </section>
+    <div class="trip-progress fade-up">
+      <div class="tp-head">
+        <div class="trip-name" id="prog-name"></div>
+        <div class="trip-dur" id="prog-dur"></div>
+      </div>
+      <div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
+      <div class="prog-labels">
+        <span>New York</span><span id="prog-lbl"></span><span>New York</span>
+      </div>
+    </div>
+    <div class="next-card fade-up" id="next-card">
+      <div class="next-pre">Next Up</div>
+      <div class="next-top">
+        <div class="next-title" id="next-title">Loading…</div>
+        <span id="next-badge"></span>
+      </div>
+      <div class="next-detail" id="next-detail"></div>
+    </div>
+    <div class="stats-row fade-up">
+      <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Flights</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-nights">10</div><div class="stat-lbl">Cruise nights</div></div>
+      <div class="stat-card"><div class="stat-num">9</div><div class="stat-lbl">Ports of call</div></div>
+    </div>
+    <div class="section-label fade-up">Upcoming Events</div>
+    <div id="upcoming-list"></div>
+    <button onclick="navTo('timeline')" style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;font-size:13px;color:var(--gold);background:none;border:none;width:100%;cursor:pointer;position:relative;z-index:1;" class="fade-up">
+      Full itinerary <span style="font-size:16px">›</span>
+    </button>
+  </main>
+</div>
+
+<!-- ═══ PAGE: TIMELINE ═══════════════════════════════════════ -->
+<div class="page" id="pg-timeline">
+  <header class="page-header">
+    <span class="header-title">Timeline</span>
+    <span class="header-wordmark" style="font-size:18px">Bon Voyage</span>
+  </header>
+  <main class="page-content" style="padding-top:calc(var(--header-h) + 4px)">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0 0;position:relative;z-index:1;">
+      <div class="view-toggle">
+        <button class="vtog active" id="vtog-list" onclick="tlView('list')">List</button>
+        <button class="vtog" id="vtog-cal" onclick="tlView('cal')">Calendar</button>
+      </div>
+      <div id="tl-count" style="font-size:11px;color:var(--muted)"></div>
+    </div>
+    <div class="filter-bar" style="padding-left:0;padding-right:0">
+      <button class="filter-chip active" onclick="tlFilter('all',this)">All</button>
+      <button class="filter-chip" onclick="tlFilter('flight',this)">Flights</button>
+      <button class="filter-chip" onclick="tlFilter('hotel',this)">Hotels</button>
+      <button class="filter-chip" onclick="tlFilter('cruise',this)">Cruise</button>
+      <button class="filter-chip" onclick="tlFilter('ground',this)">Ground</button>
+    </div>
+    <div class="vw active" id="vw-list"><div id="tl-list"></div></div>
+    <div class="vw" id="vw-cal"><div id="tl-cal"></div></div>
+  </main>
+</div>
+
+<!-- ═══ PAGE: TRAVEL ═════════════════════════════════════════ -->
+<div class="page" id="pg-travel">
+  <header class="page-header">
+    <span class="header-title">Travel</span>
+    <span class="header-wordmark" style="font-size:18px">Bon Voyage</span>
+  </header>
+  <div class="tab-bar">
+    <div class="tab-item active" id="tt-flights" onclick="travelTab('flights')">Flights</div>
+    <div class="tab-item" id="tt-hotels" onclick="travelTab('hotels')">Hotels</div>
+    <div class="tab-item" id="tt-cruise" onclick="travelTab('cruise')">Cruise</div>
+  </div>
+  <main class="page-content" style="padding-top:8px">
+    <div class="tab-panel active" id="tp-flights"></div>
+    <div class="tab-panel" id="tp-hotels"></div>
+    <div class="tab-panel" id="tp-cruise"></div>
+  </main>
+</div>
+
+<!-- ═══ PAGE: GROUND ═════════════════════════════════════════ -->
+<div class="page" id="pg-ground">
+  <header class="page-header">
+    <span class="header-title">Ground Travel</span>
+    <span id="gc-count" style="font-size:12px;color:var(--muted);background:var(--navy-raised);border:1px solid var(--navy-border);padding:3px 10px;border-radius:20px;"></span>
+  </header>
+  <main class="page-content">
+    <div id="ground-list"></div>
+    <div class="empty-state" id="ground-empty" style="display:none">
+      <div class="empty-icon">🚗</div>
+      <div class="empty-title">No transfers yet</div>
+      <div class="empty-sub">Tap + to add one</div>
+    </div>
+  </main>
+</div>
+
+<!-- ═══ PAGE: INFO ════════════════════════════════════════════ -->
+<div class="page" id="pg-info">
+  <header class="page-header">
+    <span class="header-title">Trip Info</span>
+    <span class="header-wordmark" style="font-size:18px">Bon Voyage</span>
+  </header>
+  <main class="page-content">
+    <div class="info-section fade-up">
+      <div class="info-section-title">Overview</div>
+      <div class="detail-row"><span class="detail-lbl">Trip</span><span class="detail-val" id="ov-name"></span></div>
+      <div class="detail-row"><span class="detail-lbl">Departure</span><span class="detail-val" id="ov-dep"></span></div>
+      <div class="detail-row"><span class="detail-lbl">Return</span><span class="detail-val" id="ov-ret"></span></div>
+      <div class="detail-row"><span class="detail-lbl">Duration</span><span class="detail-val" id="ov-dur"></span></div>
+      <div class="detail-row"><span class="detail-lbl">Cruise ship</span><span class="detail-val" id="ov-ship"></span></div>
+    </div>
+    <div class="info-section fade-up">
+      <div class="info-section-title">All Confirmations</div>
+      <div id="conf-list"></div>
+    </div>
+    <div class="info-section fade-up">
+      <div class="info-section-title">Hotel Contacts</div>
+      <div id="hotel-contacts"></div>
+    </div>
+    <div class="info-section fade-up">
+      <div class="info-section-title">Local Time Now</div>
+      <div id="tz-list"></div>
+    </div>
+    <div class="info-section fade-up">
+      <div class="info-section-title">Emergency Numbers</div>
+      <div class="detail-row"><span class="detail-lbl">Portugal / Spain / Italy / France</span><span class="detail-val"><a href="tel:112" style="color:var(--gold)">112</a></span></div>
+      <div class="detail-row"><span class="detail-lbl">Turkey</span><span class="detail-val"><a href="tel:112" style="color:var(--gold)">112</a></span></div>
+      <div class="detail-row"><span class="detail-lbl">MSC Cruises 24/7</span><span class="detail-val"><a href="tel:+18007260875" style="color:var(--gold)">+1 800 726 0875</a></span></div>
+      <div class="detail-row"><span class="detail-lbl">Pegasus Airlines</span><span class="detail-val"><a href="tel:+908502222375" style="color:var(--gold)">+90 850 222 2375</a></span></div>
+    </div>
+    <div class="info-section fade-up">
+      <div class="info-section-title">My Notes</div>
+      <textarea class="notes-area" id="trip-notes" rows="5" placeholder="Packing reminders, Pegasus activation code, visa info…" oninput="scheduleNoteSave()"></textarea>
+      <button class="notes-save" onclick="saveNotes()">Save notes</button>
+      <div id="notes-saved" style="font-size:11px;color:var(--success);margin-top:6px;min-height:16px"></div>
+    </div>
+    <div style="height:8px"></div>
+  </main>
+</div>
+
+<nav class="bottom-nav" id="main-nav">
+  <button class="nav-item active" data-page="home" onclick="navTo('home')">
+    <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">Home</span>
+  </button>
+  <button class="nav-item" data-page="timeline" onclick="navTo('timeline')">
+    <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <span class="nav-label">Timeline</span>
+  </button>
+  <button class="nav-item" data-page="travel" onclick="navTo('travel')">
+    <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+    <span class="nav-label">Travel</span>
+  </button>
+  <button class="nav-item" data-page="ground" onclick="navTo('ground')">
+    <svg class="nav-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+    <span class="nav-label">Ground</span>
+  </button>
+  <button class="nav-item" data-page="info" onclick="navTo('info')">
+    <svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <span class="nav-label">Info</span>
+  </button>
+</nav>
+
+<!-- Ground FAB + Modal -->
+<button class="fab" id="fab-btn" onclick="openModal()" style="display:none">+</button>
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
+<div class="modal-sheet" id="modal-sheet">
+  <div class="modal-handle"></div>
+  <div class="modal-title" id="modal-title">Add Transfer</div>
+  <input type="hidden" id="edit-id">
+  <div class="form-group"><label class="form-label">Type</label>
+    <select class="form-select" id="f-type">
+      <option value="taxi">Taxi</option>
+      <option value="private transfer">Private Transfer</option>
+      <option value="rideshare">Rideshare</option>
+      <option value="train">Train</option>
+      <option value="bus">Bus</option>
+      <option value="rental car">Rental Car</option>
+      <option value="ferry">Ferry</option>
+      <option value="other">Other</option>
+    </select></div>
+  <div class="form-group"><label class="form-label">From</label>
+    <input type="text" class="form-input" id="f-from" placeholder="e.g. Hotel Florescente, Lisbon"></div>
+  <div class="form-group"><label class="form-label">To</label>
+    <input type="text" class="form-input" id="f-to" placeholder="e.g. Lisbon Cruise Terminal"></div>
+  <div class="form-row">
+    <div class="form-group"><label class="form-label">Date</label>
+      <input type="date" class="form-input" id="f-date" min="2026-05-24" max="2026-06-14"></div>
+    <div class="form-group"><label class="form-label">Time</label>
+      <input type="time" class="form-input" id="f-time"></div>
+  </div>
+  <div class="form-group"><label class="form-label">Notes</label>
+    <textarea class="form-textarea" id="f-notes" placeholder="Driver name, price, instructions…"></textarea></div>
+  <div class="form-group"><label class="form-label">Confirmation #</label>
+    <input type="text" class="form-input" id="f-conf"></div>
+  <button class="btn-primary" onclick="saveTransfer()">Save Transfer</button>
+  <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+</div>
+
+<div id="toast">Copied!</div>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────
+// ─── Bon Voyage — Jim's Travel Itinerary ─────────────────────
+
+const TRIP = {
+  name: "Jim's European Adventure",
+  tagline: "May – June 2026",
+  departure:    new Date("2026-05-24T19:25:00"),
+  returnDate:   new Date("2026-06-14T20:05:00"),
+  planningStart:new Date("2026-02-01"),
+
+  flights: [
+    {
+      id: "f1",
+      airline: "Swiss International Air Lines",
+      flightNo: "LX 23",
+      from: { city: "New York",  code: "JFK", terminal: "1", gate: "—", time: new Date("2026-05-24T19:25:00") },
+      to:   { city: "Geneva",    code: "GVA", terminal: "—", gate: "—", time: new Date("2026-05-25T09:15:00") },
+      confirmation: "8D6HFS",
+      class: "Economy Light",
+      duration: "7h 50m",
+      notes: "Terminal 1 at JFK"
+    },
+    {
+      id: "f2",
+      airline: "Swiss International Air Lines",
+      flightNo: "LX 2092",
+      from: { city: "Geneva",    code: "GVA", terminal: "—", gate: "—", time: new Date("2026-05-25T12:05:00") },
+      to:   { city: "Lisbon",    code: "LIS", terminal: "—", gate: "—", time: new Date("2026-05-25T13:45:00") },
+      confirmation: "8D6HFS",
+      class: "Economy Light",
+      duration: "2h 40m",
+      notes: "Same booking ref as LX 23"
+    },
+    {
+      id: "f3",
+      airline: "Pegasus Airlines",
+      flightNo: "PC 1562",
+      from: { city: "Lisbon",    code: "LIS", terminal: "—", gate: "—", time: new Date("2026-06-08T22:45:00") },
+      to:   { city: "Izmir",     code: "ADB", terminal: "—", gate: "—", time: new Date("2026-06-09T05:05:00") },
+      confirmation: "1QDY8A",
+      class: "Economy",
+      duration: "3h 20m",
+      notes: "2 adult passengers · ⚠️ Activation code required on Pegasus app"
+    },
+    {
+      id: "f4",
+      airline: "SunExpress / Lufthansa",
+      flightNo: "LH 9417",
+      from: { city: "Izmir",     code: "ADB", terminal: "—", gate: "—", time: new Date("2026-06-14T11:35:00") },
+      to:   { city: "Frankfurt", code: "FRA", terminal: "—", gate: "—", time: new Date("2026-06-14T13:55:00") },
+      confirmation: "8D6HFS",
+      class: "Economy Basic",
+      duration: "3h 20m",
+      notes: ""
+    },
+    {
+      id: "f5",
+      airline: "Lufthansa",
+      flightNo: "LH 404",
+      from: { city: "Frankfurt", code: "FRA", terminal: "1", gate: "—", time: new Date("2026-06-14T17:15:00") },
+      to:   { city: "New York",  code: "JFK", terminal: "—", gate: "—", time: new Date("2026-06-14T20:05:00") },
+      confirmation: "8D6HFS",
+      class: "Economy Basic",
+      duration: "9h 50m",
+      notes: "Home! 🎉"
+    }
+  ],
+
+  hotels: [
+    {
+      id: "h1",
+      name: "Residencial Florescente",
+      city: "Lisbon", country: "Portugal",
+      address: "R. das Portas de Santo Antão 95-99, 1150-266 Lisboa",
+      checkIn:  new Date("2026-05-25"), checkOut: new Date("2026-05-28"), nights: 3,
+      confirmation: "—",
+      phone: "+351 21 342 6609",
+      notes: "Check-in: afternoon. Head to cruise terminal on May 28."
+    },
+    {
+      id: "h2",
+      name: "Chalet Saudade",
+      city: "Sintra", country: "Portugal",
+      address: "R. Dr. Alfredo da Costa 23, 2710-524 Sintra",
+      checkIn:  new Date("2026-06-07"), checkOut: new Date("2026-06-08"), nights: 1,
+      confirmation: "—",
+      phone: "+351 21 015 0055",
+      notes: "~40 min drive from Lisbon cruise terminal. Check-out Jun 8 by 12:00."
+    }
+  ],
+
+  cruise: {
+    line: "MSC Cruises",
+    ship: "MSC Opera",
+    cabin: "Cabin 9059",
+    cabinType: "Ocean View",
+    deck: "Deck 9",
+    embark: { port: "Lisbon",  date: new Date("2026-05-28"), time: "18:00" },
+    debark: { port: "Lisbon",  date: new Date("2026-06-07"), time: "09:00" },
+    confirmation: "70082971",
+    voyageNo: "FANTASTICA Experience",
+    ports: [
+      { name: "Lisbon",    country: "Portugal",        date: new Date("2026-05-28"), type: "embark", note: "Check-in opens 14:00 · Departs 18:00" },
+      { name: "At Sea",    country: "",                date: new Date("2026-05-29"), type: "sea",    note: "" },
+      { name: "Alicante",  country: "Spain",           date: new Date("2026-05-30"), type: "port",   note: "Arrive 09:00 · Depart 17:00 · 8 hrs" },
+      { name: "Mahon",     country: "Menorca, Spain",  date: new Date("2026-05-31"), type: "port",   note: "Arrive 09:00 · Depart 16:00 · 7 hrs" },
+      { name: "Olbia",     country: "Sardinia, Italy", date: new Date("2026-06-01"), type: "port",   note: "Arrive 10:00 · Depart 19:00 · 9 hrs" },
+      { name: "Genoa",     country: "Italy",           date: new Date("2026-06-02"), type: "port",   note: "Arrive 09:00 · Depart 18:00 · Portofino nearby" },
+      { name: "Marseille", country: "France",          date: new Date("2026-06-03"), type: "port",   note: "Arrive 09:00 · Depart 17:00 · Provence" },
+      { name: "At Sea",    country: "",                date: new Date("2026-06-04"), type: "sea",    note: "" },
+      { name: "Malaga",    country: "Spain",           date: new Date("2026-06-05"), type: "port",   note: "Arrive 08:00 · Depart 18:00 · 10 hrs" },
+      { name: "Cadiz",     country: "Spain",           date: new Date("2026-06-06"), type: "port",   note: "Arrive 07:00 · Depart 17:00 · Seville nearby" },
+      { name: "Lisbon",    country: "Portugal",        date: new Date("2026-06-07"), type: "debark", note: "Arrive 09:00 · Disembark by 11:00" }
+    ]
+  }
+};
+
+// Ground transfers — default seed (saved to localStorage on first load)
+const GROUND_DEFAULTS = [
+  {
+    id: "g1", type: "taxi",
+    from: "Residencial Florescente, Lisbon", to: "Lisbon Cruise Terminal",
+    date: "2026-05-28", time: "13:00",
+    notes: "Allow 30 min. Check-in on ship opens 14:00.",
+    confirmation: ""
+  },
+  {
+    id: "g2", type: "private transfer",
+    from: "Lisbon Cruise Terminal", to: "Chalet Saudade, Sintra",
+    date: "2026-06-07", time: "11:30",
+    notes: "~40 min drive from Lisbon. Hotel check-in from 15:00.",
+    confirmation: ""
+  },
+  {
+    id: "g3", type: "taxi",
+    from: "Chalet Saudade, Sintra", to: "Lisbon Airport (LIS)",
+    date: "2026-06-08", time: "19:00",
+    notes: "For PC1562 departing 22:45. Allow 45 min to airport.",
+    confirmation: ""
+  }
+];
+
+
+// ── Utilities ─────────────────────────────────────────────────
+// ─── Bon Voyage — App Utilities ──────────────────────────────
+
+function fmtDate(date, fmt='medium') {
+  const d = date instanceof Date ? date : new Date(date);
+  const fmts = {
+    short:  {month:'short', day:'numeric'},
+    medium: {month:'short', day:'numeric', year:'numeric'},
+    long:   {weekday:'short', month:'long', day:'numeric'},
+    dow:    {weekday:'long', month:'long', day:'numeric'}
+  };
+  return d.toLocaleDateString('en-US', fmts[fmt] || fmts.medium);
+}
+
+function fmtTime(date) {
+  return (date instanceof Date ? date : new Date(date))
+    .toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', hour12:false});
+}
+
+function daysBetween(a, b) {
+  return Math.round((b - a) / 864e5);
+}
+
+function countdown(target) {
+  const diff = target - new Date();
+  return diff > 0 ? {days: Math.ceil(diff/864e5), done:false} : {days:0, done:true};
+}
+
+function tripPhase() {
+  const now = new Date();
+  if (now < TRIP.departure) return 'pre';
+  if (now > TRIP.returnDate) return 'post';
+  return 'during';
+}
+
+function getGround() {
+  try {
+    const s = localStorage.getItem('bv-ground');
+    if (s) return JSON.parse(s);
+  } catch(e) {}
+  const defaults = JSON.parse(JSON.stringify(GROUND_DEFAULTS));
+  localStorage.setItem('bv-ground', JSON.stringify(defaults));
+  return defaults;
+}
+
+function saveGround(data) {
+  localStorage.setItem('bv-ground', JSON.stringify(data));
+}
+
+function getAllEvents() {
+  const evts = [];
+
+  TRIP.flights.forEach(f => {
+    evts.push({type:'flight', date:f.from.time,
+      title:`${f.from.code} → ${f.to.code}`,
+      sub:`${f.airline} · ${f.flightNo}`,
+      time:fmtTime(f.from.time), data:f});
+  });
+
+  TRIP.hotels.forEach(h => {
+    evts.push({type:'hotel',
+      date:new Date(h.checkIn.getFullYear(), h.checkIn.getMonth(), h.checkIn.getDate(), 14),
+      title:`Check in — ${h.name}`, sub:`${h.city}, ${h.country}`,
+      time:'from 14:00', data:h});
+    evts.push({type:'hotel-out',
+      date:new Date(h.checkOut.getFullYear(), h.checkOut.getMonth(), h.checkOut.getDate(), 11),
+      title:`Check out — ${h.name}`, sub:`${h.city}, ${h.country}`,
+      time:'by 11:00', data:h});
+  });
+
+  TRIP.cruise.ports.forEach(p => {
+    const t = {embark:'embark', debark:'debark', sea:'sea', port:'cruise'}[p.type] || 'cruise';
+    const subLbl = {embark:'Cruise embarkation', debark:'Cruise debarkation', sea:'Day at sea'};
+    evts.push({type:t,
+      date:new Date(p.date.getFullYear(), p.date.getMonth(), p.date.getDate(), 8),
+      title:p.name + (p.country ? `, ${p.country}` : ''),
+      sub: subLbl[p.type] || `Port of call · ${p.country}`,
+      time:{embark:'16:00', debark:'09:00', sea:'All day'}[p.type] || 'All day',
+      data:p});
+  });
+
+  getGround().forEach(g => {
+    evts.push({type:'ground',
+      date:new Date(`${g.date}T${g.time||'00:00'}`),
+      title:`${g.from} → ${g.to}`,
+      sub:g.type.charAt(0).toUpperCase()+g.type.slice(1),
+      time:g.time||'', data:g});
+  });
+
+  return evts.sort((a,b) => a.date - b.date);
+}
+
+const TYPE_META = {
+  flight:     {cls:'badge-flight', dot:'var(--info)',    tlCls:'type-flight',  label:'Flight'},
+  hotel:      {cls:'badge-hotel',  dot:'#7db8e8',        tlCls:'type-hotel',   label:'Hotel'},
+  'hotel-out':{cls:'badge-hotel',  dot:'#7db8e8',        tlCls:'type-hotel',   label:'Hotel'},
+  embark:     {cls:'badge-cruise', dot:'var(--success)', tlCls:'type-cruise',  label:'Cruise'},
+  debark:     {cls:'badge-cruise', dot:'var(--success)', tlCls:'type-cruise',  label:'Cruise'},
+  cruise:     {cls:'badge-cruise', dot:'var(--success)', tlCls:'type-cruise',  label:'Port'},
+  sea:        {cls:'',             dot:'var(--muted)',    tlCls:'type-cruise',  label:'At Sea'},
+  ground:     {cls:'badge-ground', dot:'var(--warning)', tlCls:'type-ground',  label:'Ground'}
+};
+
+function typeMeta(type) {
+  return TYPE_META[type] || {cls:'', dot:'var(--muted)', tlCls:'', label:type};
+}
+
+function getNextEvent() {
+  const now = new Date();
+  return getAllEvents().find(e => e.date >= now) || null;
+}
+
+function setActiveNav() {
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-item').forEach(el =>
+    el.classList.toggle('active', el.getAttribute('href') === page));
+}
+document.addEventListener('DOMContentLoaded', setActiveNav);
+
+
+// ── SPA Navigation ────────────────────────────────────────────
+const rendered = {};
+function navTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('pg-' + page).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.page === page);
+  });
+  document.getElementById('fab-btn').style.display = page === 'ground' ? 'flex' : 'none';
+  if (!rendered[page]) { renderPage(page); rendered[page] = true; }
+  window.scrollTo(0,0);
+}
+
+function renderPage(page) {
+  if (page === 'home')     renderHome();
+  if (page === 'timeline') renderTimeline();
+  if (page === 'travel')   renderTravel();
+  if (page === 'ground')   renderGround();
+  if (page === 'info')     renderInfo();
+}
+
+// ── Toast ─────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg || 'Copied!';
+  t.style.opacity = '1';
+  setTimeout(() => t.style.opacity = '0', 1800);
+}
+
+function copyIt(text, btn) {
+  try {
+    navigator.clipboard.writeText(text).then(() => showToast('Copied!'));
+  } catch(e) {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta); showToast('Copied!');
+  }
+  if (btn) { const orig = btn.textContent; btn.textContent = '✓'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600); }
+}
+
+// ── HOME ──────────────────────────────────────────────────────
+function renderHome() {
+  // Stars
+  const starsEl = document.getElementById('hero-stars');
+  for (let i=0;i<18;i++) {
+    const s = document.createElement('div'); s.className='star';
+    const sz = Math.random()*2+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*3}s;--dl:${Math.random()*3}s`;
+    starsEl.appendChild(s);
+  }
+  document.getElementById('hdr-name').textContent = TRIP.name;
+  document.getElementById('hdr-dates').textContent = fmtDate(TRIP.departure,'short') + ' – ' + fmtDate(TRIP.returnDate,'short') + ' 2026';
+  const phase = tripPhase();
+  if (phase==='pre') {
+    const {days} = countdown(TRIP.departure);
+    document.getElementById('hero-num').textContent = days;
+    document.getElementById('hero-unit').textContent = days===1?'day':'days';
+    document.getElementById('hero-pre').textContent = 'DEPARTURE IN';
+    document.getElementById('hero-dep').innerHTML = 'Departing <span>'+fmtDate(TRIP.departure,'long')+' · '+fmtTime(TRIP.departure)+'</span>';
+  } else if (phase==='during') {
+    const day = daysBetween(TRIP.departure, new Date())+1;
+    document.getElementById('hero-num').textContent = day;
+    document.getElementById('hero-unit').textContent = 'of '+daysBetween(TRIP.departure,TRIP.returnDate);
+    document.getElementById('hero-pre').textContent = 'TRIP DAY';
+    document.getElementById('hero-dep').innerHTML = 'Returns <span>'+fmtDate(TRIP.returnDate,'long')+'</span>';
+  } else {
+    document.getElementById('hero-num').textContent = daysBetween(TRIP.departure,TRIP.returnDate);
+    document.getElementById('hero-pre').textContent = 'MEMORIES MADE';
+    document.getElementById('hero-unit').textContent = 'nights';
+    document.getElementById('hero-dep').innerHTML = 'Returned <span>'+fmtDate(TRIP.returnDate,'long')+'</span>';
+  }
+  const now = new Date();
+  const pct = Math.max(0,Math.min(100,Math.round(((now-TRIP.planningStart)/(TRIP.returnDate-TRIP.planningStart))*100)));
+  document.getElementById('prog-bar').style.width = pct+'%';
+  document.getElementById('prog-name').textContent = TRIP.name;
+  document.getElementById('prog-dur').textContent = daysBetween(TRIP.departure,TRIP.returnDate)+' nights';
+  document.getElementById('prog-lbl').textContent = phase==='pre'?'Upcoming':phase==='during'?'In progress':'Completed';
+  document.getElementById('stat-nights').textContent = daysBetween(TRIP.cruise.embark.date,TRIP.cruise.debark.date);
+  const next = getNextEvent();
+  if (next) {
+    const m = typeMeta(next.type);
+    document.getElementById('next-title').textContent = next.title;
+    document.getElementById('next-badge').innerHTML = m.cls?`<span class="badge ${m.cls}">${m.label}</span>`:'';
+    document.getElementById('next-detail').innerHTML = next.sub+'<br>'+fmtDate(next.date,'long')+(next.time?' · '+next.time:'');
+  } else {
+    document.getElementById('next-title').textContent = 'All done — bon voyage!';
+  }
+  const upcoming = getAllEvents().filter(e=>e.date>=new Date()).slice(0,6);
+  document.getElementById('upcoming-list').innerHTML = upcoming.map(e => {
+    const m = typeMeta(e.type);
+    return `<div class="upcoming-item fade-up" onclick="navTo('travel')">
+      <div class="up-dot" style="background:${m.dot}"></div>
+      <div class="up-text"><div class="up-title">${e.title}</div><div class="up-date">${fmtDate(e.date,'short')} · ${e.time||e.sub}</div></div>
+      <span class="up-chev">›</span></div>`;
+  }).join('');
+}
+
+// ── TIMELINE ──────────────────────────────────────────────────
+let tlActiveFilter = 'all';
+function tlFilter(type, btn) {
+  tlActiveFilter = type;
+  document.querySelectorAll('#pg-timeline .filter-chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTlList();
+}
+function tlView(view) {
+  document.querySelectorAll('.vtog').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.vw').forEach(p=>p.classList.remove('active'));
+  document.getElementById('vtog-'+view).classList.add('active');
+  document.getElementById('vw-'+view).classList.add('active');
+  if (view==='cal' && !document.getElementById('tl-cal').innerHTML) renderTlCal();
+}
+function tlMatch(type) {
+  if (tlActiveFilter==='all') return true;
+  if (tlActiveFilter==='hotel') return type==='hotel'||type==='hotel-out';
+  if (tlActiveFilter==='cruise') return ['embark','debark','cruise','sea'].includes(type);
+  return type===tlActiveFilter;
+}
+function renderTimeline() { renderTlList(); }
+function renderTlList() {
+  const evts = getAllEvents().filter(e=>tlMatch(e.type));
+  document.getElementById('tl-count').textContent = evts.length+' events';
+  const today = new Date();
+  const groups={};
+  evts.forEach(e => {
+    const k=e.date.toDateString();
+    if(!groups[k]) groups[k]={date:e.date,items:[]};
+    groups[k].items.push(e);
+  });
+  document.getElementById('tl-list').innerHTML = !evts.length
+    ? '<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">No events</div></div>'
+    : Object.values(groups).map(g=>{
+      const isPast=g.date<today&&g.date.toDateString()!==today.toDateString();
+      const isToday=g.date.toDateString()===today.toDateString();
+      return `<div class="timeline-group">
+        <div class="tl-date-header">
+          <div class="tl-day" style="${isPast?'color:var(--muted)':''}">${g.date.getDate()}</div>
+          <div class="tl-date-info">
+            <div class="tl-month">${g.date.toLocaleDateString('en-US',{month:'long',year:'numeric'})}</div>
+            <div class="tl-dow">${g.date.toLocaleDateString('en-US',{weekday:'long'})}</div>
+          </div>
+          ${isToday?'<span class="badge badge-flight" style="font-size:9px">TODAY</span>':''}
+          <div class="tl-rule"></div>
+        </div>
+        <div class="tl-events">${g.items.map(e=>{
+          const m=typeMeta(e.type);
+          return `<div class="tl-event ${m.tlCls}" style="${isPast?'opacity:.4':''}">
+            <div class="tl-card">
+              <div class="tl-card-top"><div class="tl-card-title">${e.title}</div><div class="tl-card-time">${e.time}</div></div>
+              <div class="tl-card-sub">${e.sub}</div>
+            </div></div>`;
+        }).join('')}</div></div>`;
+    }).join('');
+}
+function renderTlCal() {
+  const months = [{year:2026,month:4,name:'May 2026'},{year:2026,month:5,name:'June 2026'}];
+  document.getElementById('tl-cal').innerHTML = months.map(m=>buildCalMonth(m)).join('<div class="cal-sep"></div>');
+}
+function buildCalMonth({year,month,name}) {
+  const firstDow=new Date(year,month,1).getDay();
+  const days=new Date(year,month+1,0).getDate();
+  const today=new Date();
+  let cells='';
+  for(let i=0;i<firstDow;i++) cells+='<div class="cal-day"></div>';
+  for(let d=1;d<=days;d++) {
+    const evts=getAllEvents().filter(e=>e.date.getFullYear()===year&&e.date.getMonth()===month&&e.date.getDate()===d);
+    const obj=new Date(year,month,d);
+    const inTrip=obj>=TRIP.departure&&obj<=TRIP.returnDate;
+    const isToday=obj.toDateString()===today.toDateString();
+    let cls='cal-day';
+    if(inTrip) cls+=' in-trip';
+    if(isToday) cls+=' today';
+    if(evts.length) {
+      const types=evts.map(e=>e.type);
+      if(types.some(t=>t==='flight')) cls+=' ev-flight';
+      else if(types.some(t=>['embark','debark','cruise','sea'].includes(t))) cls+=' ev-cruise';
+      else if(types.some(t=>t==='hotel'||t==='hotel-out')) cls+=' ev-hotel';
+      else if(types.some(t=>t==='ground')) cls+=' ev-ground';
+    }
+    cells+=`<div class="${cls}">${d}</div>`;
+  }
+  return `<div class="cal-month-header"><div class="cal-month-name">${name}</div></div>
+    <div class="cal-grid">
+      ${['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div class="cal-dow">${d}</div>`).join('')}
+      ${cells}
+    </div>
+    <div class="cal-legend">
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:rgba(78,159,216,.7)"></div>Flight</div>
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:rgba(61,175,122,.7)"></div>Cruise</div>
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:rgba(201,152,64,.5)"></div>Hotel</div>
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:rgba(232,152,64,.7)"></div>Ground</div>
+    </div>`;
+}
+
+// ── TRAVEL ────────────────────────────────────────────────────
+function travelTab(tab) {
+  ['flights','hotels','cruise'].forEach(t => {
+    document.getElementById('tt-'+t).classList.toggle('active',t===tab);
+    document.getElementById('tp-'+t).classList.toggle('active',t===tab);
+  });
+}
+function renderTravel() {
+  // Flights
+  document.getElementById('tp-flights').innerHTML = TRIP.flights.map(f=>`
+    <div class="boarding-pass fade-up">
+      <div class="bp-header">
+        <div class="bp-airline">${f.airline}</div>
+        <div class="bp-badge">${f.class}</div>
+      </div>
+      <div class="bp-route">
+        <div class="bp-airport">
+          <div class="bp-iata">${f.from.code}</div>
+          <div class="bp-city">${f.from.city}</div>
+          <div class="bp-time">${fmtTime(f.from.time)}</div>
+        </div>
+        <div class="bp-mid">
+          <div class="bp-line-wrap"><div class="bp-line"></div><span class="bp-plane">✈</span><div class="bp-line"></div></div>
+          <div class="bp-duration">${f.duration}</div>
+        </div>
+        <div class="bp-airport" style="text-align:right">
+          <div class="bp-iata">${f.to.code}</div>
+          <div class="bp-city">${f.to.city}</div>
+          <div class="bp-time">${fmtTime(f.to.time)}</div>
+        </div>
+      </div>
+      <div class="bp-details">
+        <div class="bp-detail"><div class="bp-dlabel">Departs</div><div class="bp-dvalue">${fmtDate(f.from.time,'short')}</div></div>
+        <div class="bp-detail"><div class="bp-dlabel">Flight</div><div class="bp-dvalue">${f.flightNo}</div></div>
+        <div class="bp-detail"><div class="bp-dlabel">Arrives</div><div class="bp-dvalue">${fmtDate(f.to.time,'short')}</div></div>
+      </div>
+      <div class="bp-footer">
+        <div><div class="bp-conf-label">Booking ref</div><div class="bp-conf-num">${f.confirmation}</div></div>
+        <button class="copy-btn" onclick="copyIt('${f.confirmation}',this)">Copy</button>
+      </div>
+      ${f.notes?`<div style="padding:10px 16px;font-size:12px;color:var(--muted);border-top:1px dashed var(--navy-border)">${f.notes}</div>`:''}
+    </div>`).join('');
+  // Hotels
+  document.getElementById('tp-hotels').innerHTML = TRIP.hotels.map(h=>`
+    <div class="hotel-card fade-up">
+      <div class="hotel-header">
+        <div class="hotel-name">${h.name}</div>
+        <div class="hotel-location">${h.city}, ${h.country}</div>
+      </div>
+      <div class="hotel-stay">
+        <div class="hotel-date-block">
+          <div class="hdlbl">Check in</div>
+          <div class="hdate">${fmtDate(h.checkIn,'short')}</div>
+          <div class="hdate-sub">from 14:00</div>
+        </div>
+        <div class="hotel-nights"><div class="hn-num">${h.nights}</div><div class="hn-lbl">night${h.nights!==1?'s':''}</div></div>
+        <div class="hotel-date-block" style="text-align:right">
+          <div class="hdlbl">Check out</div>
+          <div class="hdate">${fmtDate(h.checkOut,'short')}</div>
+          <div class="hdate-sub">by 11:00</div>
+        </div>
+      </div>
+      ${h.notes?`<div style="padding:0 16px 12px;font-size:12px;color:var(--muted);line-height:1.5">${h.notes}</div>`:''}
+      <div class="hotel-footer">
+        <div><div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Phone</div>
+        <a href="tel:${h.phone}" style="font-size:13px;color:var(--gold)">${h.phone}</a></div>
+        <button class="copy-btn" onclick="copyIt('${h.phone}',this)">Copy</button>
+      </div>
+      ${h.address?`<div style="padding:10px 16px;font-size:11px;color:var(--muted);border-top:1px dashed var(--navy-border)">${h.address}</div>`:''}
+    </div>`).join('');
+  // Cruise
+  const c = TRIP.cruise;
+  const ports = c.ports.map(p => {
+    const special = p.type==='embark'||p.type==='debark';
+    const lbl = {embark:'Embarkation',debark:'Debarkation',sea:'Day at sea'}[p.type]||p.country;
+    return `<div class="port-stop"><div class="port-stop-inner">
+      <div class="port-dot${special?' special':''}"></div>
+      <div><div class="port-name">${p.name}${p.country?', '+p.country:''}</div>
+      <div class="port-date">${fmtDate(p.date,'short')} · ${lbl}</div>
+      ${p.note?`<div class="port-type-lbl">${p.note}</div>`:''}</div>
+    </div></div>`;
+  }).join('');
+  document.getElementById('tp-cruise').innerHTML = `
+    <div class="cruise-card fade-up">
+      <div class="cruise-header"><div class="cruise-line-name">${c.line}</div><div class="cruise-badge">${c.voyageNo}</div></div>
+      <div class="cruise-body">
+        <div class="cruise-ship">${c.ship}</div>
+        <div class="cruise-cabin">${c.cabin} · ${c.cabinType} · ${c.deck}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+          <div><div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Embark</div>
+            <div style="font-size:14px;font-weight:500;color:var(--cream)">${c.embark.port}</div>
+            <div style="font-size:12px;color:var(--muted)">${fmtDate(c.embark.date,'short')} · ${c.embark.time}</div></div>
+          <div><div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Debark</div>
+            <div style="font-size:14px;font-weight:500;color:var(--cream)">${c.debark.port}</div>
+            <div style="font-size:12px;color:var(--muted)">${fmtDate(c.debark.date,'short')} · ${c.debark.time}</div></div>
+        </div>
+        <div class="cruise-route-label">Ports of Call</div>
+        <div class="port-stops">${ports}</div>
+      </div>
+      <div class="cruise-footer">
+        <div><div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Booking ref</div>
+        <div style="font-family:var(--font-mono);font-size:16px;color:var(--gold)">${c.confirmation}</div></div>
+        <button class="copy-btn" onclick="copyIt('${c.confirmation}',this)">Copy</button>
+      </div>
+    </div>`;
+}
+
+// ── GROUND ────────────────────────────────────────────────────
+let gTransfers = [];
+function renderGround() {
+  gTransfers = getGround();
+  renderGroundList();
+}
+function renderGroundList() {
+  const sorted=[...gTransfers].sort((a,b)=>new Date(a.date+'T'+(a.time||'00:00'))-new Date(b.date+'T'+(b.time||'00:00')));
+  document.getElementById('gc-count').textContent = gTransfers.length+' transfer'+(gTransfers.length!==1?'s':'');
+  const list=document.getElementById('ground-list');
+  const empty=document.getElementById('ground-empty');
+  if(!sorted.length){list.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  list.innerHTML=sorted.map(t=>{
+    const ds=t.date?new Date(t.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}):'';
+    return `<div class="ground-item fade-up" id="gi-${t.id}">
+      <button class="gi-del" onclick="delTransfer('${t.id}')" title="Delete">×</button>
+      <div class="gi-top"><span class="gi-type">${t.type}</span><span class="gi-dt">${ds}${t.time?' · '+t.time:''}</span></div>
+      <div class="gi-route"><span>${t.from}</span><span style="color:var(--muted);font-size:16px">→</span><span>${t.to}</span></div>
+      ${t.confirmation?`<div class="gi-conf">${t.confirmation}</div>`:''}
+      ${t.notes?`<div class="gi-note">${t.notes}</div>`:''}
+      <button onclick="openModal('${t.id}')" style="background:none;border:none;color:var(--muted);font-size:12px;margin-top:8px;cursor:pointer;padding:0">✎ Edit</button>
+    </div>`;
+  }).join('');
+}
+function openModal(id) {
+  document.getElementById('modal-title').textContent = id?'Edit Transfer':'Add Transfer';
+  document.getElementById('edit-id').value = id||'';
+  if(id) {
+    const t=gTransfers.find(x=>x.id===id); if(!t) return;
+    document.getElementById('f-type').value=t.type;
+    document.getElementById('f-from').value=t.from;
+    document.getElementById('f-to').value=t.to;
+    document.getElementById('f-date').value=t.date||'';
+    document.getElementById('f-time').value=t.time||'';
+    document.getElementById('f-notes').value=t.notes||'';
+    document.getElementById('f-conf').value=t.confirmation||'';
+  } else {
+    document.getElementById('f-type').value='taxi';
+    ['f-from','f-to','f-date','f-time','f-notes','f-conf'].forEach(i=>document.getElementById(i).value='');
+  }
+  document.getElementById('modal-overlay').classList.add('open');
+  document.getElementById('modal-sheet').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.getElementById('modal-sheet').classList.remove('open');
+}
+function saveTransfer() {
+  const from=document.getElementById('f-from').value.trim();
+  const to=document.getElementById('f-to').value.trim();
+  if(!from||!to){alert('Enter From and To locations.');return;}
+  const eid=document.getElementById('edit-id').value;
+  const data={id:eid||'g'+Date.now(),type:document.getElementById('f-type').value,from,to,
+    date:document.getElementById('f-date').value,time:document.getElementById('f-time').value,
+    notes:document.getElementById('f-notes').value.trim(),confirmation:document.getElementById('f-conf').value.trim()};
+  if(eid){const i=gTransfers.findIndex(t=>t.id===eid);if(i!==-1)gTransfers[i]=data;}
+  else gTransfers.push(data);
+  saveGround(gTransfers);
+  closeModal();
+  renderGroundList();
+}
+function delTransfer(id) {
+  if(!confirm('Delete this transfer?')) return;
+  gTransfers=gTransfers.filter(t=>t.id!==id);
+  saveGround(gTransfers);
+  renderGroundList();
+}
+
+// ── INFO ──────────────────────────────────────────────────────
+let noteSaveTimer;
+function scheduleNoteSave() { clearTimeout(noteSaveTimer); noteSaveTimer=setTimeout(saveNotes,900); }
+function saveNotes() {
+  localStorage.setItem('bv-notes', document.getElementById('trip-notes').value);
+  const el=document.getElementById('notes-saved');
+  el.textContent='Saved ✓'; setTimeout(()=>el.textContent='',2000);
+}
+function renderInfo() {
+  document.getElementById('ov-name').textContent = TRIP.name;
+  document.getElementById('ov-dep').textContent = fmtDate(TRIP.departure,'long')+' · '+fmtTime(TRIP.departure);
+  document.getElementById('ov-ret').textContent = fmtDate(TRIP.returnDate,'long');
+  document.getElementById('ov-dur').textContent = daysBetween(TRIP.departure,TRIP.returnDate)+' nights away';
+  document.getElementById('ov-ship').textContent = TRIP.cruise.ship+' · '+TRIP.cruise.cabin;
+  const confs=[
+    ...TRIP.flights.map(f=>{return{name:f.flightNo+' ('+f.from.code+'→'+f.to.code+')',type:'Flight',conf:f.confirmation}}),
+    ...TRIP.hotels.map(h=>{return{name:h.name,type:'Hotel',conf:h.confirmation}}),
+    {name:TRIP.cruise.ship,type:'Cruise',conf:TRIP.cruise.confirmation},
+    ...getGround().filter(g=>g.confirmation).map(g=>{return{name:g.from.split(',')[0]+' transfer',type:'Ground',conf:g.confirmation}})
+  ];
+  document.getElementById('conf-list').innerHTML=confs.map(c=>`
+    <div class="conf-item">
+      <div><div class="conf-name">${c.name}</div><div class="conf-type">${c.type}</div></div>
+      <div class="conf-right">
+        ${c.conf&&c.conf!=='—'
+          ?`<div class="conf-num">${c.conf}</div><button class="copy-btn" onclick="copyIt('${c.conf}',this)">Copy</button>`
+          :`<span style="font-size:12px;color:var(--muted)">—</span>`}
+      </div></div>`).join('');
+  document.getElementById('hotel-contacts').innerHTML=TRIP.hotels.map(h=>`
+    <div class="conf-item">
+      <div><div class="conf-name">${h.name}</div><div class="conf-type">${h.city}</div></div>
+      <div class="conf-right"><div class="conf-num" style="font-size:13px">${h.phone}</div>
+      <a href="tel:${h.phone}" class="copy-btn">Call</a></div></div>`).join('');
+  const tzData=[
+    {city:'New York',zone:'EDT (UTC−4)',iana:'America/New_York'},
+    {city:'Lisbon',zone:'WEST (UTC+1)',iana:'Europe/Lisbon'},
+    {city:'Spain / Italy / France',zone:'CEST (UTC+2)',iana:'Europe/Madrid'},
+    {city:'Izmir / Turkey',zone:'TRT (UTC+3)',iana:'Europe/Istanbul'}
+  ];
+  function lc(iana){return new Date().toLocaleTimeString('en-US',{timeZone:iana,hour:'2-digit',minute:'2-digit',hour12:false});}
+  document.getElementById('tz-list').innerHTML=tzData.map(tz=>`
+    <div class="detail-row">
+      <div><div class="detail-lbl">${tz.city}</div><div style="font-size:10px;color:var(--muted);margin-top:2px">${tz.zone}</div></div>
+      <div id="tz-${tz.iana.replace(/\//g,'-')}" style="font-family:var(--font-display);font-size:22px;color:var(--cream)">${lc(tz.iana)}</div>
+    </div>`).join('');
+  setInterval(()=>tzData.forEach(tz=>{const el=document.getElementById('tz-'+tz.iana.replace(/\//g,'-'));if(el)el.textContent=lc(tz.iana);}),30000);
+  const saved=localStorage.getItem('bv-notes');
+  if(saved) document.getElementById('trip-notes').value=saved;
+}
+
+// ── Init ──────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  renderHome();
+  rendered['home'] = true;
+});
+</script>
+</body>
+</html>
