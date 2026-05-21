@@ -552,6 +552,66 @@ body { background: #0a0d14 !important; color: #e2d5bc !important; }
 .header-title { font-size:22px!important; font-weight:600!important; font-style:italic!important; font-family:var(--font-display)!important; }
 .modal-title { font-size:22px!important; font-weight:600!important; }
 .form-label  { font-size:13px!important; font-weight:600!important; }
+
+/* ── INLINE NAV LAYOUT (no fixed/sticky) ───────────────────── */
+html, body { height: 100dvh; overflow: hidden; }
+
+.page {
+  display: none;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+  background: #0a0d14 !important;
+}
+.page.active { display: flex !important; animation: none !important; }
+
+/* Header — static, shrinks to its natural size */
+.page-header {
+  position: static !important;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* Scrollable content fills remaining space */
+.page-content {
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding-top: 16px !important;
+  overscroll-behavior: contain;
+}
+
+/* Tab bar on travel page — static inside page */
+.tab-bar {
+  position: static !important;
+  flex-shrink: 0;
+}
+
+/* Bottom nav — static at bottom of each page */
+.bottom-nav {
+  position: static !important;
+  flex-shrink: 0;
+  width: 100%;
+  height: var(--nav-h);
+  padding-bottom: 0 !important;
+  border-top: 1px solid var(--navy-border);
+  background: var(--navy-deep) !important;
+  backdrop-filter: none !important;
+  display: flex !important;
+  align-items: center;
+}
+
+/* FAB stays fixed relative to viewport on ground page */
+#fab-btn {
+  position: fixed !important;
+  bottom: calc(var(--nav-h) + 16px) !important;
+}
+
+/* Travel page needs header + tabs + content + nav */
+#pg-travel { display: none; }
+#pg-travel.active { display: flex !important; }
+/* ─────────────────────────────────────────────────────────── */
+
 </style>
 </head>
 <body>
@@ -604,6 +664,30 @@ body { background: #0a0d14 !important; color: #e2d5bc !important; }
   </main>
 </div>
 
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="home" onclick="navTo('home')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item" data-page="timeline" onclick="navTo('timeline')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="nav-label">Timeline</span>
+    </button>
+    <button class="nav-item" data-page="travel" onclick="navTo('travel')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+      <span class="nav-label">Travel</span>
+    </button>
+    <button class="nav-item" data-page="ground" onclick="navTo('ground')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <span class="nav-label">Ground</span>
+    </button>
+    <button class="nav-item" data-page="info" onclick="navTo('info')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span class="nav-label">Info</span>
+    </button>
+  </nav>
+</div>
+
 <!-- ═══ PAGE: TIMELINE ═══════════════════════════════════════ -->
 <div class="page" id="pg-timeline">
   <header class="page-header">
@@ -630,6 +714,30 @@ body { background: #0a0d14 !important; color: #e2d5bc !important; }
   </main>
 </div>
 
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="home" onclick="navTo('home')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item" data-page="timeline" onclick="navTo('timeline')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="nav-label">Timeline</span>
+    </button>
+    <button class="nav-item" data-page="travel" onclick="navTo('travel')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+      <span class="nav-label">Travel</span>
+    </button>
+    <button class="nav-item" data-page="ground" onclick="navTo('ground')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <span class="nav-label">Ground</span>
+    </button>
+    <button class="nav-item" data-page="info" onclick="navTo('info')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span class="nav-label">Info</span>
+    </button>
+  </nav>
+</div>
+
 <!-- ═══ PAGE: TRAVEL ═════════════════════════════════════════ -->
 <div class="page" id="pg-travel">
   <header class="page-header">
@@ -648,6 +756,30 @@ body { background: #0a0d14 !important; color: #e2d5bc !important; }
   </main>
 </div>
 
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="home" onclick="navTo('home')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item" data-page="timeline" onclick="navTo('timeline')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="nav-label">Timeline</span>
+    </button>
+    <button class="nav-item" data-page="travel" onclick="navTo('travel')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+      <span class="nav-label">Travel</span>
+    </button>
+    <button class="nav-item" data-page="ground" onclick="navTo('ground')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <span class="nav-label">Ground</span>
+    </button>
+    <button class="nav-item" data-page="info" onclick="navTo('info')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span class="nav-label">Info</span>
+    </button>
+  </nav>
+</div>
+
 <!-- ═══ PAGE: GROUND ═════════════════════════════════════════ -->
 <div class="page" id="pg-ground">
   <header class="page-header">
@@ -662,6 +794,30 @@ body { background: #0a0d14 !important; color: #e2d5bc !important; }
       <div class="empty-sub">Tap + to add one</div>
     </div>
   </main>
+</div>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="home" onclick="navTo('home')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item" data-page="timeline" onclick="navTo('timeline')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="nav-label">Timeline</span>
+    </button>
+    <button class="nav-item" data-page="travel" onclick="navTo('travel')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+      <span class="nav-label">Travel</span>
+    </button>
+    <button class="nav-item" data-page="ground" onclick="navTo('ground')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <span class="nav-label">Ground</span>
+    </button>
+    <button class="nav-item" data-page="info" onclick="navTo('info')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span class="nav-label">Info</span>
+    </button>
+  </nav>
 </div>
 
 <!-- ═══ PAGE: INFO ════════════════════════════════════════════ -->
@@ -708,28 +864,30 @@ body { background: #0a0d14 !important; color: #e2d5bc !important; }
   </main>
 </div>
 
-<nav class="bottom-nav" id="main-nav">
-  <button class="nav-item active" data-page="home" onclick="navTo('home')">
-    <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    <span class="nav-label">Home</span>
-  </button>
-  <button class="nav-item" data-page="timeline" onclick="navTo('timeline')">
-    <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    <span class="nav-label">Timeline</span>
-  </button>
-  <button class="nav-item" data-page="travel" onclick="navTo('travel')">
-    <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
-    <span class="nav-label">Travel</span>
-  </button>
-  <button class="nav-item" data-page="ground" onclick="navTo('ground')">
-    <svg class="nav-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-    <span class="nav-label">Ground</span>
-  </button>
-  <button class="nav-item" data-page="info" onclick="navTo('info')">
-    <svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-    <span class="nav-label">Info</span>
-  </button>
-</nav>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="home" onclick="navTo('home')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item" data-page="timeline" onclick="navTo('timeline')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="nav-label">Timeline</span>
+    </button>
+    <button class="nav-item" data-page="travel" onclick="navTo('travel')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+      <span class="nav-label">Travel</span>
+    </button>
+    <button class="nav-item" data-page="ground" onclick="navTo('ground')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <span class="nav-label">Ground</span>
+    </button>
+    <button class="nav-item" data-page="info" onclick="navTo('info')">
+      <svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span class="nav-label">Info</span>
+    </button>
+  </nav>
+</div>
 
 <!-- Ground FAB + Modal -->
 <button class="fab" id="fab-btn" onclick="openModal()" style="display:none">+</button>
@@ -1037,13 +1195,16 @@ document.addEventListener('DOMContentLoaded', setActiveNav);
 const rendered = {};
 function navTo(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('pg-' + page).classList.add('active');
+  const activePage = document.getElementById('pg-' + page);
+  activePage.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => {
     n.classList.toggle('active', n.dataset.page === page);
   });
   document.getElementById('fab-btn').style.display = page === 'ground' ? 'flex' : 'none';
   if (!rendered[page]) { renderPage(page); rendered[page] = true; }
-  window.scrollTo(0,0);
+  // Scroll the page-content div to top, not window
+  const content = activePage.querySelector('.page-content');
+  if (content) content.scrollTop = 0;
 }
 
 function renderPage(page) {
